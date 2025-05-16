@@ -1,4 +1,4 @@
-name: Rebase arch branches to mater
+name: Rebase arch branches to master
 
 on: 
   push:
@@ -9,19 +9,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Configure Git
+      - name: Count number of commits in push
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-      
+          echo "Current SHA: $GITHUB_SHA"
+          echo "Before SHA: ${{ github.event.before }}"
+
+          COMMIT_COUNT=$(git rev-list --count ${{ github.event.before }}..$GITHUB_SHA)
+          echo "This push contains $COMMIT_COUNT commits."
+          echo "COMMIT_COUNT=${COMMIT_COUNT}" >> $GITHUB_ENV
+
+      - name: Check for .gz file changes
+        id: check_gz_changes
+        run: |
+          git diff --name-only HEAD~${{env.COMMIT_COUNT}} HEAD
+          if git diff --name-only HEAD~${{env.COMMIT_COUNT}} HEAD | grep '^resources/zip/.*\.gz$'; then
+            echo "gz_changed=true" >> $GITHUB_ENV
+          else
+            echo "gz_changed=false" >> $GITHUB_ENV
+          fi
+
       - name: Rebase and push
+        if: ${{ env.gz_changed == 'false' }}
         run: |
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+
             for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/origin/arch*); do
                 git checkout ${branch#origin/}
                 git rebase master
