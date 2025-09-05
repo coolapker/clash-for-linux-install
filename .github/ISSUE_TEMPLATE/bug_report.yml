@@ -39,7 +39,7 @@ body:
 
   - type: dropdown
     attributes:
-      label: `Shell` 环境
+      label: Shell 环境
       options:
         - Bash
         - Zsh
