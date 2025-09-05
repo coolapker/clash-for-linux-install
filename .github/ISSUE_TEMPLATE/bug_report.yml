@@ -7,25 +7,17 @@ body:
     id: ensure
     attributes:
       label: 前置确认
-      description: 在提交之前，请勾选以下选项以证明您已经完成必要的自助检查
+      description: 在提交之前，请勾选以下选项以确认您已完成必要的自助排查
       options:
-        - label: 我确认这是项目 **Bug**， 而非：不清楚怎么使用/。否则请移步对应 Issue 模板或[讨论区](https://github.com/nelvko/clash-for-linux-install/discussions)
+        - label: 我确认这是项目 **Bug**， 而非操作不当或使用不清楚。否则请移步对应 Issue 模板或在[讨论区](https://github.com/nelvko/clash-for-linux-install/discussions)提问
           required: true
         - label: 我已查阅 [常见问题](https://github.com/nelvko/clash-for-linux-install/wiki/FAQ)，未找到解决方案
           required: true
         - label: 我已排查 [Issues](https://github.com/nelvko/clash-for-linux-install/issues)，未发现相关或重复的议题
           required: true
+        - label: 我已确认本地与远程仓库最新提交的哈希一致。 (`git rev-parse --short HEAD`)
+          required: true
 
-  - type: checkboxes
-    attributes:
-      label: 最新版本确认
-      description: >
-        请确认您当前克隆的仓库是 **最新 commit 版本**。  
-        查看本地版本哈希：`git rev-parse --short HEAD`
-      options:
-      - label: 我已确认本地与远端最新版本一致
-        required: true
-  
   - type: dropdown
     attributes:
       label: 克隆的分支
@@ -52,7 +44,7 @@ body:
     attributes:
       label: 系统信息
       description: |
-        请提供系统相关信息，以下任一即可：
+        请提供系统相关信息，可任选以下命令输出之一：
         ```bash
         hostnamectl
         lsb_release -a
@@ -65,12 +57,14 @@ body:
   - type: textarea
     attributes:
       label: 描述 & 复现 & 截图
-      description: 请提供错误的详细描述和复现步骤，~~必要时~~最好附上截图（请勿泄露订阅等敏感信息）
+      description: |
+        请详细描述：
+        1. 操作步骤  
+        2. 期望结果  
+        3. 实际表现  
+        4. ~~必要时~~最好附上截图（请勿泄露订阅等敏感信息）
       placeholder: |
-        1. 操作步骤 …
-        2. 期望结果 …
-        3. 实际表现 …
-        4. 附图 …
+
     validations:
       required: true
 
@@ -78,6 +72,6 @@ body:
     id: logs
     attributes:
       label: 日志
-      description: 请粘贴相关日志输出（会自动格式化为代码，无需手动加反引号）
+      description: 请粘贴相关日志输出（自动格式化为代码，无需手动加反引号）
       render: shell
   
