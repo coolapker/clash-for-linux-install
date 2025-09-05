@@ -1,0 +1,45 @@
+name: 错误反馈
+description: "提交 Mihomo 漏洞"
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: checkboxes
+    id: ensure
+    attributes:
+      label: 验证步骤
+      description: 在提交之前，请勾选以下选项以证明您已经阅读并理解了以下要求，否则该 issue 将被关闭。
+      options:
+        - label: 我已查阅 [wiki](https://github.com/nelvko/clash-for-linux-install/wiki) 中的解决方案未能解决我的问题
+          required: true
+        - label: 我已通过关键字查询已关闭的 [issue](https://github.com/nelvko/clash-for-linux-install/issues?q=is%3Aissue%20state%3Aclosed) 未能发现/解决我的问题
+          required: true
+        - label: 我已通过关键字查询已打开的 [issue](https://github.com/nelvko/clash-for-linux-install/issues?q=is%3Aissue%20state%3Aopen) 未发现有重复的议题
+          required: true
+
+
+  - type: dropdown
+    attributes:
+      label: 分支
+      description: 请提供克隆的分支名
+      options:
+        - master
+        - feat-init
+        - arch-* 分支
+  - type: input
+    attributes:
+      label: 请检查克隆的是否是最新commit 版本
+      description: git rev-parse --short HEAD
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 描述 & 复现
+      description: 请提供错误的详细描述。
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 截图
+      description: 
+    validations:
+      required: true
