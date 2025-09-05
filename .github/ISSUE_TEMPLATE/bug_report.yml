@@ -63,7 +63,7 @@ body:
         2. 期望结果  
         3. 实际表现  
         4. ~~必要时~~最好附上截图（请勿泄露订阅等敏感信息）
-      placeholder: |
+      # placeholder: |
 
     validations:
       required: true
