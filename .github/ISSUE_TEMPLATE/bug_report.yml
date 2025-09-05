@@ -7,18 +7,18 @@ body:
     id: ensure
     attributes:
       label: 前置确认
-      description: 在提交之前，请勾选以下选项以证明您已经完成自助检查：
+      description: 在提交之前，请勾选以下选项以证明您已经完成必要的自助检查
       options:
-        - label: 我确认这是项目 **Bug**， 而非使用方法不清楚。若是使用问题，请移步讨论区/FAQ
+        - label: 我确认这是项目 **Bug**， 而非使用方法不清楚。若是使用问题，请移步(讨论区)[https://github.com/nelvko/clash-for-linux-install/discussions]
           required: true
         - label: 我已查阅 [常见问题](https://github.com/nelvko/clash-for-linux-install/wiki/FAQ)，未找到解决方案
           required: true
-        - label: 我已排查过 [Issues](https://github.com/nelvko/clash-for-linux-install/issues)，未发现相关或重复的问题
+        - label: 我已排查过 [Issues](https://github.com/nelvko/clash-for-linux-install/issues)，未发现相关或重复的议题
           required: true
 
   - type: dropdown
     attributes:
-      label: 分支
+      label: 克隆分支
       description: 请选择您当前克隆的分支
       options:
         - master
@@ -29,21 +29,56 @@ body:
 
   - type: checkboxes
     attributes:
-      label: 版本确认
+      label: 最新版本确认
       description: >
         请确认您当前克隆的仓库是 **最新 commit 版本**。  
-        查看本地版本哈希：
-        ```bash
-        git rev-parse --short HEAD
-        ```
+        查看本地版本哈希：`git rev-parse --short HEAD`
       options:
-      - label: 我已比对过本地与远程最新版本哈希一致
+      - label: 我已确认本地与远端最新版本一致
         required: true
+
+  - type: dropdown
+    attributes:
+      label: `Shell` 环境
+      options:
+        - Bash
+        - Zsh
+        - Fish
+        - Others
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 系统信息
+      description: |
+        请提供系统相关信息，以下任一即可：
+        ```bash
+        hostnamectl
+        lsb_release -a
+        uname -a
+        ```
+      render: shell
+    validations:
+      required: true
 
   - type: textarea
     attributes:
       label: 描述 & 复现 & 截图
       description: 请提供错误的详细描述和复现步骤，~~必要时~~最好附上截图（请勿泄露订阅等敏感信息）
+      placeholder: |
+        1. 操作步骤 …
+        2. 期望结果 …
+        3. 实际表现 …
+        4. 附图 …
     validations:
       required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志
+      description: 请粘贴相关日志输出（会自动格式化为代码，无需手动加反引号）
+      render: shell
   
