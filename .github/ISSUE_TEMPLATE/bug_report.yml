@@ -28,8 +28,7 @@ body:
   
   - type: dropdown
     attributes:
-      label: 克隆分支
-      description: 请选择您当前克隆的分支
+      label: 克隆的分支
       options:
         - master
         - feat-init
