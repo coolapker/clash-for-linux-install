@@ -53,7 +53,7 @@ body:
         lsb_release -a
         uname -a
         ```
-      render: shell
+      # render: shell
     validations:
       required: true
 
