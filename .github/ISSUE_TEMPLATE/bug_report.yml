@@ -9,7 +9,7 @@ body:
       label: 前置确认
       description: 在提交之前，请勾选以下选项以确认您已完成必要的自助排查
       options:
-        - label: 我确认这是项目 **Bug**， 而非操作不当或使用不清楚。否则请移步对应 Issue 模板或在[讨论区](https://github.com/nelvko/clash-for-linux-install/discussions)提问
+        - label: 我确认这是项目 **Bug**， 而非操作不当或使用不清楚。否则请移步其他 Issue 模板或在[讨论区](https://github.com/nelvko/clash-for-linux-install/discussions)提问
           required: true
         - label: 我已查阅 [常见问题](https://github.com/nelvko/clash-for-linux-install/wiki/FAQ)，未找到解决方案
           required: true
@@ -19,6 +19,7 @@ body:
           required: true
 
   - type: dropdown
+    id: branch
     attributes:
       label: 克隆的分支
       options:
@@ -29,6 +30,7 @@ body:
       required: true
 
   - type: dropdown
+    id: shell
     attributes:
       label: Shell 环境
       options:
@@ -40,7 +42,8 @@ body:
     validations:
       required: true
 
-  - type: textarea
+  - type: input
+    id: system
     attributes:
       label: 系统信息
       description: |
@@ -55,6 +58,7 @@ body:
       required: true
 
   - type: textarea
+    id: desc
     attributes:
       label: 描述 & 复现 & 截图
       description: |
@@ -62,7 +66,8 @@ body:
         1. 操作步骤  
         2. 期望结果  
         3. 实际表现  
-        4. ~~必要时~~最好附上截图（请勿泄露订阅等敏感信息）
+        4. ~~必要时~~最好附上截图
+        （请勿泄露订阅等敏感信息）
       # placeholder: |
 
     validations:
