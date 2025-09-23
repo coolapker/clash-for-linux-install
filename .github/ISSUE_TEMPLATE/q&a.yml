@@ -43,7 +43,7 @@ body:
     attributes:
       label: 问题描述
       description: |
-        ~~必要时~~最好附上截图
+        ~~必要时~~最好附上截图。
         **请勿泄露订阅、IP 等敏感信息**
 
     validations:
